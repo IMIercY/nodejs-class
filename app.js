@@ -12,6 +12,20 @@ import connectToDb from "./db/index.js";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const PORT = process.env.PORT || 3000;
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'nonce-ps0QMWhuej5oqzobisuQnA=='"],
+        objectSrc: ["'self'"],
+        // Add other directives as needed
+      },
+    },
+  })
+);
 const logFile = join(__dirname, "blogchef.log");
 
 app.use(compression());
@@ -35,11 +49,11 @@ app.use("/admin", session(app));
 //   })
 // );
 app.use(morgan(":method - :url - :date - :response-time ms"));
-app.use(
-  morgan(":method - :url - :date - :response-time ms", {
-    stream: createWriteStream(logFile, { flags: "a" }),
-  })
-);
+// app.use(
+//   morgan(":method - :url - :date - :response-time ms", {
+//     stream: createWriteStream(logFile, { flags: "a" }),
+//   })
+// );
 
 app.set("view engine", "pug");
 
