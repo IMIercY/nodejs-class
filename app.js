@@ -9,6 +9,7 @@ import home from "./routes/home/index.js";
 import admin from "./routes/admin/index.js";
 import api from "./routes/api/index.js";
 import connectToDb from "./db/index.js";
+import helmet from "helmet";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
