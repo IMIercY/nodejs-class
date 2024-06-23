@@ -64,7 +64,7 @@ app.use("/", home);
 
 Promise.all([connectToDb()])
   .then(() =>
-    app.listen(3000, () => console.log("Blog Chef is cooking on port 3000"))
+    app.listen(PORT, () => console.log(`My Blog is cooking on port ${PORT}!`))
   )
   .catch((error) => {
     console.error(`MongoDB Atlas Error: ${error}`);
